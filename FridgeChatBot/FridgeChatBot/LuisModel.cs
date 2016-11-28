@@ -19,11 +19,11 @@ namespace FridgeChatBot
             {
                 // TODO: put URI in config file
                 // TODO: insert your LUIS URL here
-                string luisURL = "https://api.projectoxford.ai/luis/v1/application?id=5ad69a7d-f722-4319-bc73-dbb89d65135f&subscription-key=";
-                // load the key from web.config
-                string luisKey = WebConfigurationManager.AppSettings["MicrosoftLUISKey"];
-                // append the Key from web.config
-                luisURL = luisURL + luisKey;
+                string luisURL = "https://api.projectoxford.ai/luis/v1/application?id=" +
+                    WebConfigurationManager.AppSettings["MicrosoftLUISId"] +
+                    "&subscription-key=" +
+                    WebConfigurationManager.AppSettings["MicrosoftLUISKey"];
+
                 string uri = luisURL + "&q=" + strEscaped;
                 HttpResponseMessage msg = await client.GetAsync(uri);
 

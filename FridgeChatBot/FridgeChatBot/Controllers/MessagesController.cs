@@ -40,27 +40,64 @@ namespace FridgeChatBot
                             answer = "I'm sorry. I didn't understand that. Try: \"What can we cook for dinner?\" or  \"What ingredients are we missing?\"";
                             break;
 
-                        case "Greeting":
+                        case "greeting":
                             answer = "Hello! Feeling hungry and adventurous? Try: \"What can we cook for dinner?\" or  \"I'm hungry!\"";
+
                             break;
 
-                        case "FindRecipe":
-
-                            answer = "Could you please provide me with a list of ingredeints you have or wish to use?";
-                            break;
-
-                        case "PassIngredients":
-                            // take in ingredients list and format correctly to pass into API url
-                            activity.Text.Remove(0, 6);             // remove "I have "
-                            activity.Text.Replace(",", "%2C");      // replace all commas with '%2C'
-                            activity.Text.Replace("and", "");       // remove all 'and' if there are any
-                            activity.Text.Replace(" ", "");         // remove all spaces if there are any
-
-                            var argIngredients = activity.Text;
-
+                        case "addList":
+                            // add ingredient(s) to the list
                             // Store the values into a local text file
-                            var IngredientsList = new StateList();
-                            IngredientsList.AddIngredients(argIngredients);
+                            var IngredientsListAdd = new StateList();
+                            IngredientsListAdd.AddIngredients(activity.Text);
+
+                            answer = "Successfully added ingredients.";
+                            break;
+
+                        case "removeList":
+                            // remove ingredient(s) to the list
+                            // Remo e the values from the local text file
+                            var IngredientsListRemove = new StateList();
+                            IngredientsListRemove.RemoveIngredients(activity.Text);
+
+                            answer = "Sucesfully removed ingredients.";
+                            break;
+
+                        case "newList":
+                            // clear the current list to start new
+                            answer = "newList";
+                            break;
+
+                        case "displayList":
+                            // read current ingredients list
+                            var IngredientsListRead = new StateList();
+                            var list = IngredientsListRead.ReadIngredients();
+                            var items = "";
+                            for (int i = 0; i < list.Length; i++)
+                            {
+                                items += " " + (i + 1) + ". " + list[i] + '\n';
+                            }
+
+                            answer = "You currently have: \n" + items;
+                            break;
+
+                        case "findRecipe":
+                            // read current ingredients list
+                            var IngredientsListAPI = new StateList();
+                            var arg = IngredientsListAPI.ReadIngredients();
+                            var API_arg = "I have";
+                            for (int i = 0; i < arg.Length; i++)
+                            {
+                                if ((i + 1) == arg.Length)
+                                {
+                                    // last item in array
+                                    API_arg += " " + arg[i];
+                                }
+                                else
+                                {
+                                    API_arg += " " + arg[i] + ",";
+                                }
+                            }
 
                             var caller = new CallAPI();
 
@@ -69,7 +106,7 @@ namespace FridgeChatBot
                                 // Initialize recipeResult to hold json info
                                 // Call first API to obtain recipe from ingredients
                                 var recipeResult = new JsonRecipe();
-                                recipeResult = caller.GetRecipe(argIngredients);
+                                recipeResult = caller.GetRecipe(API_arg);
 
 
                                 // Initialize recipeResult to hold json info
@@ -127,7 +164,7 @@ namespace FridgeChatBot
                             answer = "It looks like you may be missing some ingredients! Try: \"Send me a grocery list!\"";
                             break;
 
-                        case "GetIngredients":
+                        case "getShoppingList":
                             // Retrieve ShoppingList from state              
                             answer = userData.GetProperty<string>("ShoppingList");
                             break;
