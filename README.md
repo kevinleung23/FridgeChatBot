@@ -10,15 +10,15 @@ ChatBot that helps you make decisions on what to cook for your next meal. The bo
 FridgeChatBot was created to show what is possible with the Microsoft Bot Framework using C# and the steps it takes to get it created and up and running! We walk through the basics steps of setup and customization using Language Understanding Intelligent Service (LUIS). This walkthrough will cover creating a basic C# chatbot, as well as recreating the FridgeChatBot using the same API.
 
 ### Prerequisite: What I will be using
-* Visual Studio (Community Edition)
-* Microsoft live account
-* Microsoft Bot Framework Channel Emulator
+* [Visual Studio (Community Edition)](https://www.visualstudio.com/vs/)
+* [Microsoft live account](https://login.live.com/)
+* [Microsoft Bot Framework Channel Emulator](https://docs.botframework.com/en-us/tools/bot-framework-emulator/#navtitle)
 * Internet connection!
 
 ### Creating Your Visual Studio Project
 
 
 
- ````
+ ```
   > CODE
  ````
