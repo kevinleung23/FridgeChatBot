@@ -41,7 +41,7 @@ namespace FridgeChatBot
                             break;
 
                         case "greeting":
-                            answer = "Hello! Feeling hungry and adventurous? You can add and remove ingredients from your list or try to find a recipe!";
+                            answer = "Hello! Feeling hungry and adventurous? You can add and remove ingredients from your list or try to find a recipe! \"Add/remove milk and butter\", \"Find me a recipe\"";
                             break;
 
                         case "addList":
