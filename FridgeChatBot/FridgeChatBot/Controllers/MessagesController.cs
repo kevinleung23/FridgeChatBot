@@ -37,54 +37,82 @@ namespace FridgeChatBot
                     switch (luisObj.intents[0].intent) // assumption: first intent is highest score
                     {
                         case "":
-                            answer = "I'm sorry. I didn't understand that. Try: \"What can we cook for dinner?\" or  \"What ingredients are we missing?\"";
+                            answer = "I'm sorry. I didn't understand that. You can add and remove ingredients from your list or try to find a recipe!";
                             break;
 
                         case "greeting":
-                            answer = "Hello! Feeling hungry and adventurous? Try: \"What can we cook for dinner?\" or  \"I'm hungry!\"";
-
+                            answer = "Hello! Feeling hungry and adventurous? You can add and remove ingredients from your list or try to find a recipe!";
                             break;
 
                         case "addList":
                             // add ingredient(s) to the list
+                            // create array to hold entities
+                            string[] items = new string[luisObj.entities.Length];
+
+                            // parse the entities and pass in
+                            for (int i = 0; i < luisObj.entities.Length; i++)
+                            {
+                                items[i] = luisObj.entities[i].entity;
+                            }
+
                             // Store the values into a local text file
                             var IngredientsListAdd = new StateList();
-                            IngredientsListAdd.AddIngredients(activity.Text);
+                            IngredientsListAdd.AddIngredients(items);
 
                             answer = "Successfully added ingredients.";
                             break;
 
                         case "removeList":
                             // remove ingredient(s) to the list
-                            // Remo e the values from the local text file
+                            // create array to hold entities
+                            string[] removeItems = new string[luisObj.entities.Length];
+
+                            // parse the entities and pass in
+                            for (int i = 0; i < luisObj.entities.Length; i++)
+                            {
+                                removeItems[i] = luisObj.entities[i].entity;
+                            }
+
+                            // Remove the values from the local text file
                             var IngredientsListRemove = new StateList();
-                            IngredientsListRemove.RemoveIngredients(activity.Text);
+                            IngredientsListRemove.RemoveIngredients(removeItems);
 
                             answer = "Sucesfully removed ingredients.";
                             break;
 
                         case "newList":
                             // clear the current list to start new
-                            answer = "newList";
+                            var IngredientsListClear = new StateList();
+                            IngredientsListClear.clearIngredients();
+
+                            answer = "Sucesfully clearned the ingredients list. Add more ingredients back!";
                             break;
 
                         case "displayList":
                             // read current ingredients list
                             var IngredientsListRead = new StateList();
                             var list = IngredientsListRead.ReadIngredients();
-                            var items = "";
+                            var listItems = "";
                             for (int i = 0; i < list.Length; i++)
                             {
-                                items += " " + (i + 1) + ". " + list[i] + '\n';
+                                listItems += (i + 1) + ". " + list[i] + '\n';
                             }
 
-                            answer = "You currently have: \n" + items;
+                            answer = "You currently have: \n" + listItems;
                             break;
 
                         case "findRecipe":
                             // read current ingredients list
                             var IngredientsListAPI = new StateList();
                             var arg = IngredientsListAPI.ReadIngredients();
+
+                            // empty list check
+                            if (arg.Length == 0)
+                            {
+                                answer = "It looks like your ingredients list is empty. Try adding some ingredients then searching for a recipe!";
+                                break;
+                            }
+
                             var API_arg = "I have";
                             for (int i = 0; i < arg.Length; i++)
                             {
@@ -142,23 +170,41 @@ namespace FridgeChatBot
                                 replyToConversation.Attachments.Add(plAttachment);
                                 var replyCard = await connector.Conversations.SendToConversationAsync(replyToConversation);
 
+                                // Load our current ingredients list we we can cross check and mark what we already have.
+                                var IngredientsListGrocery = new StateList();
+                                var inventoryList = IngredientsListGrocery.ReadIngredients();
+
                                 // GetIngredients - complete ingredients from the API response
                                 // Load the list into a sorted dictionary with the aisle for user's convenience
+                                // Before we load into the dictionary, cross-check to see if we already have the item
+                                int counter = 0;
                                 var dict = new SortedDictionary<string, string>();
                                 foreach (var item in recipeLink.extendedIngredients)
                                 {
+                                    for (int searchIndex = 0; searchIndex < inventoryList.Length; searchIndex++)
+                                    {
+                                        if (inventoryList[searchIndex] == item.name)
+                                        {
+                                            item.aisle = "At Home!";
+                                        }
+                                    }
                                     dict.Add(item.name, item.aisle);
+                                    counter++;
                                 }
 
-                                ShoppingList = "Shopping List: \n";
+                                // create two arrays, keys = ingredeints, value = aisle.
+                                var keyArray = new string[counter];
+                                var valueArray = new string[counter];
+                                int index = 0;
                                 foreach (KeyValuePair<string, string> item in dict.OrderBy(key => key.Value))
                                 {
-                                    ShoppingList += String.Format("{0} ({1}).\n", item.Key, item.Value);
+                                    keyArray[index] = item.Key;
+                                    valueArray[index] = item.Value;
+                                    index++;
                                 }
 
-                                // Store the shoppingList string in the current client state
-                                // Allows the string to be accessed in preceeding reply
-                                userData.SetProperty<string>("ShoppingList", ShoppingList);
+                                userData.SetProperty<string[]>("foodList", keyArray);
+                                userData.SetProperty<string[]>("aisleList", valueArray);
                                 await stateClient.BotState.SetUserDataAsync(activity.ChannelId, activity.From.Id, userData);
                             }
                             answer = "It looks like you may be missing some ingredients! Try: \"Send me a grocery list!\"";
@@ -166,7 +212,16 @@ namespace FridgeChatBot
 
                         case "getShoppingList":
                             // Retrieve ShoppingList from state              
-                            answer = userData.GetProperty<string>("ShoppingList");
+                            var foodList = userData.GetProperty<string[]>("foodList");
+                            var aisleList = userData.GetProperty<string[]>("aisleList");
+                            var toBuy = "";
+
+                            // print the cross-checked grocery list for the user
+                            for (int i = 0; i < foodList.Length; i++)
+                            {
+                                toBuy += (i + 1) + ". " + foodList[i] + " (" + aisleList[i] + ")" + '\n';
+                            }
+                            answer = "Shopping List: \n" + toBuy;
                             break;
                     }
                 }
