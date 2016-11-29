@@ -14,8 +14,6 @@ namespace FridgeChatBot
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        public string ShoppingList { get; set; }
-
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -30,9 +28,6 @@ namespace FridgeChatBot
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 // holds response to displayto user
                 string answer = "I'm sorry. I didn't understand that. Try: \"What can we cook for dinner?\" or  \"What ingredients are we missing?\"";
-
-                // Grocery list Flag
-                bool foundRecipe = false;
 
                 Rootobject luisObj = await LUISClient.ParseUserInput(activity.Text);
                 if (luisObj.intents.Length > 0)
@@ -205,8 +200,7 @@ namespace FridgeChatBot
                                     valueArray[index] = item.Value;
                                     index++;
                                 }
-
-                                foundRecipe = true;
+                                
                                 userData.SetProperty<string[]>("foodList", keyArray);
                                 userData.SetProperty<string[]>("aisleList", valueArray);
                                 await stateClient.BotState.SetUserDataAsync(activity.ChannelId, activity.From.Id, userData);
@@ -216,7 +210,7 @@ namespace FridgeChatBot
 
                         case "getShoppingList":
                             // check if we have found a recipe first
-                            if (foundRecipe == false)
+                            if (userData.GetProperty<string[]>("foodList") == null)
                             {
                                 answer = "We need to find you a recipe first! Try: \"Find me a recipe!\"";
                                 break;
