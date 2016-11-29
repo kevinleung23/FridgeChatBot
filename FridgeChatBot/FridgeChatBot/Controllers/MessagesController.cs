@@ -201,6 +201,7 @@ namespace FridgeChatBot
                                     index++;
                                 }
                                 
+                                // Save userData as properties in user session
                                 userData.SetProperty<string[]>("foodList", keyArray);
                                 userData.SetProperty<string[]>("aisleList", valueArray);
                                 await stateClient.BotState.SetUserDataAsync(activity.ChannelId, activity.From.Id, userData);
