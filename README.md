@@ -3,7 +3,9 @@
 
 ChatBot that helps you make decisions on what to cook for your next meal. The bot takes ingredients that you have at home, or would like to cook with and offers recipes with ratings, links and pictures. Once you decide on a recipe, it can send you a grocery list so you know exactly what to buy! This bot can even retain the state of your grocery list.
 
-// IMAGE: Sample conversation with bot
+![FridgeChatBotExample](Images/Chat1.PNG)
+![FridgeChatBotExample](Images/Chat2.PNG)
+![FridgeChatBotExample](Images/Chat3.PNG)
 
 ## Walk Through with Resources
 FridgeChatBot was created to show what is possible with the Microsoft Bot Framework using C# .NET and the steps it takes to get it created and up and running! We walk through the basics steps of setup and customization using Language Understanding Intelligent Service (LUIS). This walkthrough will cover creating a basic C# chatbot, as well as recreating the FridgeChatBot using the same API.
