@@ -50,8 +50,11 @@ This template project is an Echo Bot, it will return your input with the number 
 ### 3. Web.config Store all your valuable keys and secrets!
 
 
-Note: If you are using a Github repository, make sure to include a .gitignore containing your Web.Config file so no one can find your keys!
+
+**Note: If you are using a Github repository, make sure to include a .gitignore containing your Web.Config file so no one can find your keys!**
+
 Q: What is a .gitignore?
+
 A: .gitignore is a special file with a list of project files and directories that you are EXPLICITLY telling GitHub to not include in your repository. This allows you to keep certain files/directories private and not public). Check out my .gitignore file for an example.
 
 ### 4. Adding simple control flow
