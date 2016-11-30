@@ -64,9 +64,9 @@ A: .gitignore is a special file with a list of project files and directories tha
 #### 5b. LUIS Intents
 #### 5c. LUIS Entities
 
-### Publish your Bot to Microsoft Azure
-### Register your Bot with the Microsoft Bot Framework
-### Configure Channels for future deployment
+### 6. Publish your Bot to Microsoft Azure
+### 7. Register your Bot with the Microsoft Bot Framework
+### 8. Configure Channels for future deployment
 
 ## FridgeChatBot Code Breakdown
 
