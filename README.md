@@ -18,8 +18,24 @@ FridgeChatBot was created to show what is possible with the Microsoft Bot Framew
 * [Microsoft Bot Builder SDK](http://aka.ms/bf-bc-vstemplate) - Unzip file. Will be used when starting our VS Project
 * Internet connection!
 
-### Creating Your Visual Studio Project
+### 1.Creating Your Visual Studio Project
+* [Getting started with the Connector](https://docs.botframework.com/en-us/csharp/builder/sdkreference/gettingstarted.html) - Step by step on how to create a new VS project, publish, and register your bot.
 
+1. [Download and install the Bot Application template](http://aka.ms/bf-bc-vstemplate) (Listed in Prereqs)
+2. Save the zip file to your Visual Studio 2015 templates directory which is traditionally in "%USERPROFILE%\Documents\Visual Studio 2015\Templates\ProjectTemplates\Visual C#\"
+3. Open Visual Studio
+4. Create a new C# project using the new Bot Application template.
+
+![NewBotProject](Images/NewProject.PNG)
+
+This template project is an Echo Bot, it will return your input with the number of characters. Let's use the Bot Framework Emulator and check it out!
+
+### 2.Testing with the Bot Framework Emulator
+![EmulatorSetup](Images/EmulatorSetup.PNG)
+
+### 3.
+### 4.
+### 5.
 
 
  ```
