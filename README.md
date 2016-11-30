@@ -13,6 +13,7 @@ FridgeChatBot was created to show what is possible with the Microsoft Bot Framew
 * [Microsoft account](http://accounts.microsoft.com) - Access LUIS.ai and Bot Framework Account
 * [Microsoft Azure Subscription](http://azure.com) – A free trial is sufficient
 * [Microsoft Bot Framework Channel Emulator](https://docs.botframework.com/en-us/tools/bot-framework-emulator/#navtitle) - Test our Bot
+* [Microsoft Bot Builder SDK](http://aka.ms/bf-bc-vstemplate) - Unzip file. Will be used when starting our VS Project
 * Internet connection!
 
 ### Creating Your Visual Studio Project
