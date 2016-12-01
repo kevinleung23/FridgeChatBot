@@ -124,11 +124,33 @@ if (luisObj.intents.Length > 0)
 }
 ```
 ### LUIS Entities
-luisObj.entities
+Similar to the intent array, our entities are stored almost the same way. Because luisObj.entities is an array of class Entity (which has many properties), we must iterate through the array and store all of the property entity, which is the string of the ingredient we are interested in. Iterating through, we collect all of the strings and store them in our own string[] items. 
+```
+// create array to hold entities
+string[] items = new string[luisObj.entities.Length];
+
+// parse the entities and pass in
+for (int i = 0; i < luisObj.entities.Length; i++)
+{
+  items[i] = luisObj.entities[i].entity;
+}
+```
+We now have all of the LUIS identified entities in our local variable. Next we will pass these entities along to our StateList manager to add and store the strings.
 
 ## Retain State
-Simple text file System I/O read write stream
-StateList.cs
+We utilize a simple file System.IO to read and write to a file.txt. This is a very simple solution to maintaining state. The StateList class has four main methods which are abstracted from the MessagesController. Add and Remove methods are passed in the string[] items which we gathered above, containing all of the entiteis LUIS identified. Without LUIS, we would have to parse each string manually and identify if there are any ingredients. This would involve crosschecking with a database of ingredients which will be very expensive. Using LUIS also don't confine our users from entering inputs in a specific format. They are free to enter whatever and however they want! This allows a better and seemless user experience.
+
+```
+internal void AddIngredients(string[] ingredients)
+internal void RemoveIngredients(string[] Unwantedingredients)
+internal string[] ReadIngredients()
+internal void clearIngredients()
+```
+
+Alterative solutions: 
+* local database using Entity Framework
+* Azure Easy Tables
+* Azure Blob Storage
 
 ## Deserializing API json
 Deserialize
