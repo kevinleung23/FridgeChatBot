@@ -89,7 +89,9 @@ public class Rootobject
 ```
 See FridgeChatBot/LuisModel.cs for reference.
 
-**Note: LuisModel.cs is refereced from https://github.com/jennifermarsman/MicrosoftCareerBot - Credit goes to @jennifermarsman**
+**Note: LuisModel.cs is refereced from https://github.com/jennifermarsman/MicrosoftCareerBot**
+
+**Credit goes to @jennifermarsman**
 
 ### LUIS Intents
 Our Rootojbect luisObj makes it nice and easy for us to access our intents! It's just a class property. LUIS will return the list of intents into the luisObj.intents array sorted based on the confident percentage (highest confidence will be at index 0). First we check if any intents were returned (safe programming), next we take the first index which will have the highest confident level intent. We assume LUIS is smart enough and this intent is correct. Once we have the intent string, we can use a switch case flow to direct the conversation accordingly.
