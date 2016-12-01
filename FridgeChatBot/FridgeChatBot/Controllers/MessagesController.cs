@@ -39,7 +39,27 @@ namespace FridgeChatBot
                             break;
 
                         case "greeting":
-                            answer = "Hello! Feeling hungry and adventurous? You can add and remove ingredients from your list or try to find a recipe! \"Add/remove milk and butter\", \"Find me a recipe\"";
+                            answer = "Hello! Feeling hungry and adventurous? You can add and remove ingredients from your list or try to find a recipe! Ask for help and more examples!";
+                            break;
+
+                        case "help":
+                            // populate the commands and examples
+                            var commandList = "";
+                            var commandHelp = new string[6];
+                            commandHelp[0] = "Add ingredients: \"Add milk, butter and eggs to my list.\"\n";
+                            commandHelp[1] = "Remove ingredients: \"Remove butter and eggs from my list.\"\n";
+                            commandHelp[2] = "Show your ingredients list: \"Please show me my list.\"\n";
+                            commandHelp[3] = "Start a new list: \"Start a new list.\" or \"Clear my list.\"\n";
+                            commandHelp[4] = "Find a recipe: \"What can we cook tonight?\"\n";
+                            commandHelp[5] = "Show your missing ingredients: \"What ingredients are we missing?\"\n";
+
+                            // add the commands to the answer string to be displayed
+                            for (int i = 0; i < commandHelp.Length; i++)
+                            {
+                                commandList += (i + 1) + ". " + commandHelp[i] + '\n';
+                            }
+
+                            answer = "Here are the actions you can do with examples: \n" + commandList;
                             break;
 
                         case "addList":
@@ -75,7 +95,7 @@ namespace FridgeChatBot
                             var IngredientsListRemove = new StateList();
                             IngredientsListRemove.RemoveIngredients(removeItems);
 
-                            answer = "Sucesfully removed ingredients.";
+                            answer = "Successfully removed ingredients.";
                             break;
 
                         case "newList":
@@ -83,7 +103,7 @@ namespace FridgeChatBot
                             var IngredientsListClear = new StateList();
                             IngredientsListClear.clearIngredients();
 
-                            answer = "Sucesfully clearned the ingredients list. Add more ingredients back!";
+                            answer = "Successfully cleared the ingredients list. Add more ingredients back!";
                             break;
 
                         case "displayList":
@@ -91,6 +111,14 @@ namespace FridgeChatBot
                             var IngredientsListRead = new StateList();
                             var list = IngredientsListRead.ReadIngredients();
                             var listItems = "";
+
+                            // check if list is currently empty
+                            if (list.Length == 0)
+                            {
+                                answer = "Your list is currently empty. Add more ingredients!";
+                                break;
+                            }
+
                             for (int i = 0; i < list.Length; i++)
                             {
                                 listItems += (i + 1) + ". " + list[i] + '\n';
