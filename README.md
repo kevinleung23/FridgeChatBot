@@ -44,7 +44,7 @@ This template project is an Echo Bot, it will return your input with the number 
 
 ![EmulatorTest](Images/EmulatorTest.PNG)
 
-### 3. Web.config Store all your valuable keys and secrets!
+### 3. Web.config to store all your valuable keys and secrets!
 Ensure that you store any valuable keys in your Web.Config file. These keys should not be leaked to the public, as others can use your keys and consume all of your credits! However, your keys are needed throughout your code in other files, so how do you access them and still keep them safe?
 
 Within your Web.config you can add key value pairs. Now all of your super secret keys are all neat in one file! Just make sure to hide this file! (especially if you are using GitHub, see note below)
@@ -68,9 +68,10 @@ Within your Web.config you can add key value pairs. Now all of your super secret
 Within your source code, all you need to do to access these keys is:
 ```
 using System.Web.Configuration;
-WebConfigurationManager.AppSettings["MicrosoftLUISId"]
-```
 
+string LUISId = WebConfigurationManager.AppSettings["MicrosoftLUISId"]
+```
+This will return the string value of the specified key. 
 
 **Note: If you are using a Github repository, make sure to include a .gitignore containing your Web.Config file so no one can find your keys!**
 
@@ -79,6 +80,7 @@ Q: What is a .gitignore?
 A: .gitignore is a special file with a list of project files and directories that you are EXPLICITLY telling GitHub to not include in your repository. This allows you to keep certain files/directories private and not public). Check out my .gitignore file for an example.
 
 ### 4. Adding simple control flow
+All of your control flow will live inside your Controllers/MessageController.cs
 
 ### 5. Integrate LUIS for a smarter Bot
 #### 5a. LUIS Overview
