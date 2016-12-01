@@ -59,18 +59,70 @@ Now we have our intents, lets add an entitiy: ingredients. We can train LUIS to 
 ```
 Rootobject luisObj = await LUISClient.ParseUserInput(activity.Text);
 ```
-This Rootobject luisObj now holds the intents and entities of your user's input. Let's see how we can combine a little control flow to utilize them and drive our conversation.
+This Rootobject luisObj now holds the intents and entities of your user's input. Now that we know what happens behind the scnes when we call the LUIS API, let's see how we can combine a little control flow to utilize them and drive our conversation.
 
 A LuisModel class is used to call the LUIS API, deserialize the object and return a class Rootobject.
+```
+public class Rootobject
+    {
+        public string query { get; set; }
+        public Intent[] intents { get; set; }
+        public Entity[] entities { get; set; }
+    }
 
+    public class Intent
+    {
+        public string intent { get; set; }
+        public float score { get; set; }
+    }
+
+    public class Entity
+    {
+        public string entity { get; set; }
+        public string type { get; set; }
+        public int startIndex { get; set; }
+        public int endIndex { get; set; }
+        public float score { get; set; }
+    }
+```
 See FridgeChatBot/LuisModel.cs for reference.
 
-**Note: LuisModel.cs is refereced from [@jennifermarsman](https://github.com/jennifermarsman/MicrosoftCareerBot)**
-
-**Credit goes to @jennifermarsman**
+**Note: LuisModel.cs is refereced from https://github.com/jennifermarsman/MicrosoftCareerBot - Credit goes to @jennifermarsman**
 
 ### LUIS Intents
-luisObj.intents
+Our Rootojbect luisObj makes it nice and easy for us to access our intents! It's just a class property. LUIS will return the list of intents into the luisObj.intents array sorted based on the confident percentage (highest confidence will be at index 0). First we check if any intents were returned (safe programming), next we take the first index which will have the highest confident level intent. We assume LUIS is smart enough and this intent is correct. Once we have the intent string, we can use a switch case flow to direct the conversation accordingly.
+```
+if (luisObj.intents.Length > 0)
+{
+  switch (luisObj.intents[0].intent) // assumption: first intent is highest score
+  {
+    case "":
+      answer = "I'm sorry. I didn't understand that. You can add and remove ingredients from your list or try to find a recipe!";
+      break;
+
+    case "greeting":
+      answer = "Hello! Feeling hungry and adventurous? Ask for help and more examples!";
+      break;
+    
+    case "help":
+      // do something when intent is "help"
+      break;
+    case "addList":
+      // do something when intent is "addList"
+      break;
+    case "removeList":
+      // do something when intent is "removeList"
+      break;
+    case "displayList":
+      // do something when intent is "displayList"
+      break;
+    ...
+  }
+  // Return response back to the user
+  Activity reply = activity.CreateReply(answer);
+  await connector.Conversations.ReplyToActivityAsync(reply);
+}
+```
 ### LUIS Entities
 luisObj.entities
 
