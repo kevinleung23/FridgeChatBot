@@ -70,6 +70,7 @@ namespace FridgeChatBot
             // Return array
             return ingredients;
         }
+
         internal void clearIngredients()
         {
             // Open the file
