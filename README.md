@@ -142,7 +142,7 @@ for (int i = 0; i < luisObj.entities.Length; i++)
 We now have all of the LUIS identified entities in our local variable. Next we will pass these entities along to our StateList manager to add and store the strings.
 
 ## Retain State
-We utilize a simple file System.IO to read and write to a file.txt. This is a very simple solution to maintaining state. The StateList class has four main methods which are abstracted from the MessagesController. Add and Remove methods are passed in the string[] items which we gathered above, containing all of the entiteis LUIS identified. Without LUIS, we would have to parse each string manually and identify if there are any ingredients. This would involve crosschecking with a database of ingredients which will be very expensive. Using LUIS also don't confine our users from entering inputs in a specific format. They are free to enter whatever and however they want! This allows a better and seemless user experience.
+We utilize a simple file System.IO to read and write to a file.txt. This is a very simple solution to maintaining state. The StateList class has four main methods which are abstracted from the MessagesController. Add and Remove methods are passed in the string[] items which we gathered above, containing all of the entiteis LUIS identified. Without LUIS, we would have to parse each string manually and identify if there are any ingredients. This would involve crosschecking with a database of ingredients which will be very expensive. Using LUIS also does not confine our users from entering inputs in a specific format. They are free to enter whatever and however they want! This allows for a better and seemless user experience.
 
 ```
 internal void AddIngredients(string[] ingredients)
