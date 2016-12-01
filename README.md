@@ -8,6 +8,7 @@ ChatBot that helps you make decisions on what to cook for your next meal. The bo
 ![Chat1](Images/Chat1.png)
 ![Chat2](Images/Chat2.png)
 ![Chat3](Images/Chat3.png)
+![Chat4](Images/Chat4.png)
 
 ## FridgeChatBot Code Breakdown
 
