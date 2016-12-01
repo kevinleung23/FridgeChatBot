@@ -9,9 +9,8 @@ Feel free to download this repo and try it on your local machine. All you have t
 ## FridgeChatBot Code Breakdown
 I break down different key parts of this bot to help you understand how you can make one of your own!
 
-For more information and official documentation, please visit [BotFrameworkDocumentation](https://docs.botframework.com/en-us/).
-
-Information and documentation on my specific API, visit [Mashape Spoonacular](https://market.mashape.com/spoonacular).
+* For more information and official documentation, please visit [BotFrameworkDocumentation](https://docs.botframework.com/en-us/).
+* Information and documentation on my specific API, visit [Mashape Spoonacular](https://market.mashape.com/spoonacular).
 
 ### Hide your secrets with Web.Config
 Ensure that you store any valuable keys in your Web.Config file. These keys should not be leaked to the public, as others can use your keys and consume all of your credits! However, your keys are needed throughout your code in other files, so how do you access them and still keep them safe?
