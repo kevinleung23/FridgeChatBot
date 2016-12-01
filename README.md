@@ -48,7 +48,7 @@ A: .gitignore is a special file with a list of project files and directories tha
 ### LUIS Overview
 Language Understanding Intelligent Service (LUIS) is a great way to make your bot smarter and ready to handle various inputs from your users. LUIS breaks down each phrase or input statement and determines the intent and any defined entities within the utterance. These intents and entities, mixed with a little control flow logic, can really help your bot understand what the user is asking, and respond accordingly. It is almost imposible to code for every user input, there are just too many possibilities!
 
-Example: How many ways can you think of to greet someone? Hello, Hi, What's Up?, Hiya, Good Morning! ... They all mean the same thing! The intent is all the same! LUIS handles and takes care of the heavy lifting for you and just returns to you what you need.
+Example: How many ways can you think of to greet someone? Hello, Hi, What's Up?, Hiya, Good Morning! ... They all mean the same thing! The intent is all the same! LUIS handles and takes care of the heavy lifting for you and just returns what you need.
 
 ![LUIS](Images/luis1.png)
 
