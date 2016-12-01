@@ -8,7 +8,6 @@ namespace FridgeChatBot
         internal void AddIngredients(string[] ingredients)
         {
             //Save the current list so we do not lose data
-            //string[] currentIngredients = File.ReadAllLines(@"C:\Users\keleung\Documents\GitHub\Microsoft\FridgeChatBot\FridgeChatBot\FridgeChatBot\StateList.txt");
             string[] currentIngredients = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory.ToString(), "StateList.txt"));
 
             //Pass the filepath and filename to the StreamWriter Constructor
