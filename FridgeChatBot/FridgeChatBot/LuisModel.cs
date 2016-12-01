@@ -9,6 +9,8 @@ using System.Web.Configuration;
 
 namespace FridgeChatBot
 {
+    // Class source referenced from https://github.com/jennifermarsman/MicrosoftCareerBot
+    // Credit: @Jennifermarsman
     public class LUISClient
     {
         public static async Task<Rootobject> ParseUserInput(string strInput)
