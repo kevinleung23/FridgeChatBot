@@ -62,8 +62,12 @@ Rootobject luisObj = await LUISClient.ParseUserInput(activity.Text);
 This Rootobject luisObj now holds the intents and entities of your user's input. Let's see how we can combine a little control flow to utilize them and drive our conversation.
 
 A LuisModel class is used to call the LUIS API, deserialize the object and return a class Rootobject.
+
 See FridgeChatBot/LuisModel.cs for reference.
+
 **Note: LuisModel.cs is refereced from [@jennifermarsman](https://github.com/jennifermarsman/MicrosoftCareerBot)**
+
+**Credit goes to @jennifermarsman**
 
 ### LUIS Intents
 luisObj.intents
