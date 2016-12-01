@@ -4,10 +4,6 @@ http://fridgechatbot.azurewebsites.net/
 
 ChatBot that helps you make decisions on what to cook for your next meal. The bot takes ingredients that you have at home, or would like to cook with and offers recipes with ratings, links and pictures. Once you decide on a recipe, it can send you a grocery list so you know exactly what to buy! This bot can even retain the state of your grocery list.
 
-![FridgeChatBotExample](Images/Chat1.PNG)
-![FridgeChatBotExample](Images/Chat2.PNG)
-![FridgeChatBotExample](Images/Chat3.PNG)
-
 ## Walk Through Basic .NET Bot with LUIS (Intents and Entities)
 FridgeChatBot was created to show what is possible with the Microsoft Bot Framework using C# .NET and the steps it takes to get it created and up and running! We walk through the basics steps of setup and customization using Language Understanding Intelligent Service (LUIS). This walkthrough will cover creating a basic C# chatbot, as well as code explainations for FridgeChatBot.
 
@@ -49,7 +45,31 @@ This template project is an Echo Bot, it will return your input with the number 
 ![EmulatorTest](Images/EmulatorTest.PNG)
 
 ### 3. Web.config Store all your valuable keys and secrets!
+Ensure that you store any valuable keys in your Web.Config file. These keys should not be leaked to the public, as others can use your keys and consume all of your credits! However, your keys are needed throughout your code in other files, so how do you access them and still keep them safe?
 
+Within your Web.config you can add key value pairs. Now all of your super secret keys are all neat in one file! Just make sure to hide this file! (especially if you are using GitHub, see note below)
+```
+<configuration>
+  <appSettings>
+    <!-- update these with your BotId, Microsoft App Id and your Microsoft App Password-->
+    <add key="BotId" value="FridgeBot" />
+    <add key="Mashape_Key_Kevin" value="<Key HERE>" />
+    <add key="MicrosoftAppId" value="<Key HERE>" />
+    <add key="MicrosoftAppPassword" value="<Key HERE>" />
+    <add key ="MicrosoftLUISId" value = "<Key HERE>" />
+    <add key="MicrosoftLUISKey" value="<Key HERE>" />
+  </appSettings>
+  
+  <!-- Other Code -->
+  
+</configuration>
+```
+
+Within your source code, all you need to do to access these keys is:
+```
+using System.Web.Configuration;
+WebConfigurationManager.AppSettings["MicrosoftLUISId"]
+```
 
 
 **Note: If you are using a Github repository, make sure to include a .gitignore containing your Web.Config file so no one can find your keys!**
