@@ -10,6 +10,7 @@ Feel free to download this repo and try it on your local machine. All you have t
 I break down different key parts of this bot to help you understand how you can make one of your own!
 
 For more information and official documentation, please visit [BotFrameworkDocumentation](https://docs.botframework.com/en-us/).
+Information and documentation on my specific API, visit [Mashape Spoonacular](https://market.mashape.com/spoonacular).
 
 ### Hide your secrets with Web.Config
 Ensure that you store any valuable keys in your Web.Config file. These keys should not be leaked to the public, as others can use your keys and consume all of your credits! However, your keys are needed throughout your code in other files, so how do you access them and still keep them safe?
@@ -48,7 +49,7 @@ A: .gitignore is a special file with a list of project files and directories tha
 
 ## Integrate LUIS for a smarter Bot
 ### LUIS Overview
-Language Understanding Intelligent Service (LUIS) is a great way to make your bot smarter and ready to handle various inputs from your users. LUIS breaks down each phrase or input statement and determines the intent and any defined entities within the utterance. These intents and entities, mixed with a little control flow logic, can really help your bot understand what the user is asking, and respond accordingly. It is almost imposible to code for every user input, there are just too many possibilities!
+[Language Understanding Intelligent Service (LUIS)](www.luis.ai) is a great way to make your bot smarter and ready to handle various inputs from your users. LUIS breaks down each phrase or input statement and determines the intent and any defined entities within the utterance. These intents and entities, mixed with a little control flow logic, can really help your bot understand what the user is asking, and respond accordingly. It is almost imposible to code for every user input, there are just too many possibilities!
 
 Example: How many ways can you think of to greet someone? Hello, Hi, What's Up?, Hiya, Good Morning! ... They all mean the same thing! The intent is all the same! LUIS handles and takes care of the heavy lifting for you and just returns what you need.
 
