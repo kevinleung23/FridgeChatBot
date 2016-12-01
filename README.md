@@ -10,6 +10,7 @@ Feel free to download this repo and try it on your local machine. All you have t
 I break down different key parts of this bot to help you understand how you can make one of your own!
 
 For more information and official documentation, please visit [BotFrameworkDocumentation](https://docs.botframework.com/en-us/).
+
 Information and documentation on my specific API, visit [Mashape Spoonacular](https://market.mashape.com/spoonacular).
 
 ### Hide your secrets with Web.Config
