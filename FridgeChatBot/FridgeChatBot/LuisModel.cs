@@ -21,12 +21,12 @@ namespace FridgeChatBot
             {
                 // TODO: put URI in config file
                 // TODO: insert your LUIS URL here
-                string luisURL = "https://api.projectoxford.ai/luis/v1/application?id=" +
+                string luisURL = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/" +
                     WebConfigurationManager.AppSettings["MicrosoftLUISId"] +
-                    "&subscription-key=" +
+                    "?subscription-key=" +
                     WebConfigurationManager.AppSettings["MicrosoftLUISKey"];
-
-                string uri = luisURL + "&q=" + strEscaped;
+                
+                string uri = luisURL + "&verbose=true&q=" + strEscaped;
                 HttpResponseMessage msg = await client.GetAsync(uri);
 
                 if (msg.IsSuccessStatusCode)
